@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Medical Insurance Premium Calculator</title>
+  <style>
+    .button {
+  border-radius: 1px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 1px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+  body {background-color: powderblue;}
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+      background-color: aquamarine;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      background-color:rgb(red, green, blue);
+    }
+    .form-group input {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: rgb(red, green, blue);
+    }
+  </style>
+</head>
+<body>
+  <h1>Medical Insurance Premium Calculator</h1>
+  <form>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age">
+    </div>
+    <div class="form-group">
+      <label for="coverage">Coverage Amount:</label>
+      <input type="number" id="coverage" name="coverage">
+    </div>
+    <div class="button">
+    <button type="submit">Calculate</button></div>
+    </form>
+   </div>
+  </form>
+  <p id="premium"></p>
+  <script>
+    const form = document.querySelector('form');
+    const premiumElement = document.querySelector('#premium');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const age = form.elements.age.value;
+      const coverage = form.elements.coverage.value;
+
+      function calculatePremium(age, coverage) {
+        let premium = 0;
+
+        // Calculate base premium based on age
+        if (age < 18) {
+          premium = 50;
+        } else if (age < 25) {
+          premium = 75;
+        } else if (age < 35) {
+          premium = 100;
+        } else if (age < 45) {
+          premium = 125;
+        } else if (age < 55) {
+          premium = 150;
+        } else if (age < 65) {
+          premium = 175;
+        } else {
+          premium = 200;
+        }
+
+        // Add additional premium based on coverage amount
+        if (coverage < 25000) {
+          premium += 50;
+        } else if (coverage < 50000) {
+          premium += 75;
+        } else if (coverage < 75000) {
+          premium += 100;
+        } else if (coverage < 100000) {
+          premium += 125;
+        } else {
+          premium += 150;
+        }
+
+        return premium;
+      }
+
+      const premium = calculatePremium(age, coverage);
+      premiumElement.textContent = `Premium: $${premium}`;
+    });
+  </script>
+</body>
+</html>
